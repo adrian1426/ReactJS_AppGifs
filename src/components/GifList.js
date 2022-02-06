@@ -4,20 +4,27 @@ import { getGifs } from '../services/gifService';
 
 const GifList = (props) => {
   const [gifs, setGifs] = useState([]);
-  const { keyWord } = props;
+  const [loading, setLoading] = useState(false);
+  const { keyword } = props.params;
 
   const _getGifs = useCallback(async () => {
-    const gifs = await getGifs(keyWord);
+    setLoading(true);
+    const gifs = await getGifs(keyword);
     setGifs(gifs);
-  }, [keyWord]);
+    setLoading(false);
+  }, [keyword]);
 
   useEffect(() => {
     _getGifs();
   }, [_getGifs]);
 
+  if (loading) {
+    return <h1>Cargando...</h1>
+  }
+
   return (
     <>
-      <h1>Gifs</h1>
+      <h1>{keyword}</h1>
       {
         gifs.map(gif => (
           <GifImage

@@ -1,14 +1,22 @@
-import { useState } from 'react';
 import GifList from './components/GifList';
+import { Route, Link } from 'wouter';
 import './App.css';
 
 function App() {
-  const [keyWord, setKeyWord] = useState('panda');
 
   return (
     <div className="App">
       <section className='App-content'>
-        <GifList keyWord={keyWord} />
+        <h1>App Gifs</h1>
+
+        <Link to="/gif/pandas">pandas</Link>
+        <Link to="/gif/mexico">mexico</Link>
+        <Link to="/gif/uruguay">uruguay</Link>
+
+        <Route
+          component={GifList}
+          path="/gif/:keyword"
+        />
       </section>
     </div>
   );
