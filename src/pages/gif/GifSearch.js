@@ -1,8 +1,9 @@
 import { useState, useEffect, useCallback } from 'react';
-import GifImage from "./GifImage";
-import { getGifs } from '../services/gifService';
+import { getGifs } from '../../services/gifService';
+import GifList from '../../components/gif/GifList';
+import Spinner from '../../components/spinner/Spinner';
 
-const GifList = (props) => {
+const GifSearch = (props) => {
   const [gifs, setGifs] = useState([]);
   const [loading, setLoading] = useState(false);
   const { keyword } = props.params;
@@ -19,22 +20,14 @@ const GifList = (props) => {
   }, [_getGifs]);
 
   if (loading) {
-    return <h1>Cargando...</h1>
+    return <Spinner />
   }
 
   return (
-    <>
-      <h1>{keyword}</h1>
-      {
-        gifs.map(gif => (
-          <GifImage
-            key={gif.id}
-            gif={gif}
-          />
-        ))
-      }
-    </>
+    <div>
+      <GifList gifs={gifs} />
+    </div>
   );
 };
 
-export default GifList;
+export default GifSearch;
