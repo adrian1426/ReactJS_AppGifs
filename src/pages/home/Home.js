@@ -9,8 +9,7 @@ const POPULAR_GIFS = ['Matrix', 'Mexico', 'Colombia', 'Naruto'];
 
 const Home = () => {
   const [keyword, setKeyword] = useState('');
-  const busquedaDefault = 'osito';
-  const { loading, gifs } = useGifs(busquedaDefault);
+  const { loading, gifs } = useGifs();
   const pushLocation = useLocation()[1];
 
   const handleSubmit = evt => {

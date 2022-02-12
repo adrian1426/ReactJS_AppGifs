@@ -13,6 +13,7 @@ const GifItem = (props) => {
       >
         <h4>{gif.title}</h4>
         <img
+          loading='lazy'
           src={gif.url}
           alt={gif.title}
         />

@@ -7,8 +7,16 @@ export const useGifs = (keyword) => {
 
   const _getGifs = useCallback(async () => {
     setLoading(true);
-    const gifs = await getGifs(keyword);
+
+    const newKeyword = keyword || localStorage.getItem('lastKey') || 'random';
+
+    const gifs = await getGifs(newKeyword);
     setGifs(gifs);
+
+    if (keyword) {
+      localStorage.setItem('lastKey', keyword);
+    }
+
     setLoading(false);
   }, [keyword]);
 
