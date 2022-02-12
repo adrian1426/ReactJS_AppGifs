@@ -1,12 +1,17 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'wouter';
+import { useGifs } from '../../hooks/useGifs';
 import { gifSearchBR } from '../../constants/appRouterConstants';
+import Spinner from '../../components/spinner/Spinner';
+import GifList from '../../components/gif/GifList';
 
 const POPULAR_GIFS = ['Matrix', 'Mexico', 'Colombia', 'Naruto'];
 
 const Home = () => {
   const [keyword, setKeyword] = useState('');
-  const [path, pushLocation] = useLocation();
+  const busquedaDefault = 'osito';
+  const { loading, gifs } = useGifs(busquedaDefault);
+  const pushLocation = useLocation()[1];
 
   const handleSubmit = evt => {
     evt.preventDefault();
@@ -16,6 +21,10 @@ const Home = () => {
   const handleChange = evt => {
     setKeyword(evt.target.value);
   };
+
+  if (loading) {
+    return <Spinner />;
+  }
 
   return (
     <>
@@ -29,6 +38,9 @@ const Home = () => {
           value={keyword}
         />
       </form>
+
+      <h3>úlitmo Gifs</h3>
+      <GifList gifs={gifs} />
 
       <ul>
         {
