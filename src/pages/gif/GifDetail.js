@@ -1,8 +1,10 @@
 
-const GifDetail = () => {
+const GifDetail = (props) => {
+  const { params } = props;
+
   return (
     <div>
-      Detalles
+      Detalles {params.id}
     </div>
   );
 };

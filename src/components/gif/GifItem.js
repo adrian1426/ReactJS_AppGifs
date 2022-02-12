@@ -1,4 +1,5 @@
 import { Link } from 'wouter';
+import { gifDetailBR } from '../../constants/appRouterConstants';
 import './GifItem.css';
 
 const GifItem = (props) => {
@@ -7,7 +8,7 @@ const GifItem = (props) => {
   return (
     <div className='Gif'>
       <Link
-        to={`/gif/${gif.id}`}
+        to={`${gifDetailBR}/${gif.id}`}
         className="Gif-link"
       >
         <h4>{gif.title}</h4>
