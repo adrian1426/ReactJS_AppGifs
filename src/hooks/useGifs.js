@@ -1,8 +1,9 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useContext, useState, useEffect, useCallback } from 'react';
+import GifContext from '../context/GifContext';
 import { getGifs } from '../services/gifService';
 
 export const useGifs = (keyword) => {
-  const [gifs, setGifs] = useState([]);
+  const { gifs, setGifs } = useContext(GifContext);
   const [loading, setLoading] = useState(false);
 
   const _getGifs = useCallback(async () => {
@@ -18,7 +19,7 @@ export const useGifs = (keyword) => {
     }
 
     setLoading(false);
-  }, [keyword]);
+  }, [keyword, setGifs]);
 
   useEffect(() => {
     _getGifs();
