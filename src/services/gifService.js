@@ -2,7 +2,7 @@ const apiBase = process.env.REACT_APP_API_GIFS;
 const apiKey = process.env.REACT_APP_API_KEY;
 
 export const getGifs = async (keyWord = 'panda') => {
-  const urlGifs = `${apiBase}/search?api_key=${apiKey}&q=${keyWord}&limit=50&offset=0&rating=G&lang=en`;
+  const urlGifs = `${apiBase}/gifs/search?api_key=${apiKey}&q=${keyWord}&limit=50&offset=0&rating=G&lang=en`;
 
   try {
     const response = await fetch(urlGifs);
@@ -21,6 +21,20 @@ export const getGifs = async (keyWord = 'panda') => {
     });
 
     return urls;
+  } catch (error) {
+    return [];
+  }
+};
+
+export const getTrendingGif = async () => {
+  const urlGifs = `${apiBase}/trending/searches?api_key=${apiKey}`;
+
+  try {
+    const response = await fetch(urlGifs);
+    const dataResponse = await response.json();
+
+    const { data } = dataResponse;
+    return data;
   } catch (error) {
     return [];
   }

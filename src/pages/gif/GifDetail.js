@@ -6,7 +6,6 @@ const GifDetail = (props) => {
   const { params } = props;
 
   const gif = gifs.find(g => g.id === params.id);
-  console.log(gif);
 
   return (
     <div>
