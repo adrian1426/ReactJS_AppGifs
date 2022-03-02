@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { getTrendingGif } from 'services/gifService';
 import GifCategory from '../gif/GifCategory';
 
@@ -24,13 +24,15 @@ const SearchTrending = () => {
 
 const SearchTrendingLazy = () => {
   const [show, setShow] = useState(false);
+  const elementoDiv = useRef();
 
   useEffect(() => {
-    const onLoadObserver = (entries) => {
+    const onLoadObserver = (entries, observer) => {
       const element = entries[0];
 
       if (element.isIntersecting) {
         setShow(true);
+        observer.disconnect();
       }
     };
 
@@ -38,11 +40,13 @@ const SearchTrendingLazy = () => {
       rootMargin: '100px'
     });
 
-    observer.observe(document.getElementById('lazy-trending'));
+    observer.observe(elementoDiv.current);
+
+    return () => observer.disconnect();
   });
 
   return (
-    <div id='lazy-trending'>
+    <div ref={elementoDiv}>
       {show && <SearchTrending />}
     </div>
   );
