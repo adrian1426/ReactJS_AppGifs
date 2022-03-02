@@ -4,7 +4,7 @@ import { useGifs } from '../../hooks/useGifs';
 import { gifSearchBR } from '../../constants/appRouterConstants';
 import Spinner from 'components/spinner/Spinner';
 import GifList from 'components/gif/GifList';
-import SearchTrendingLazy from 'components/trending/SearchTrending';
+import SearchTrendingLazy from 'components/trending/SearchTrendingLazy';
 
 const Home = () => {
   const [keyword, setKeyword] = useState('');

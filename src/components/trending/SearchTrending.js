@@ -1,7 +1,6 @@
-import { useEffect, useState, useRef } from 'react';
-import { getTrendingGif } from 'services/gifService';
-import GifCategory from '../gif/GifCategory';
-import { useNearScreen } from '../../hooks/useNearScreen';
+import GifCategory from "components/gif/GifCategory";
+import { useEffect, useState } from "react";
+import { getTrendingGif } from "services/gifService";
 
 const SearchTrending = () => {
   const [trends, setTrends] = useState([]);
@@ -23,14 +22,4 @@ const SearchTrending = () => {
   );
 };
 
-const SearchTrendingLazy = () => {
-  const [isNearScreen, elementoDiv] = useNearScreen('115px');
-
-  return (
-    <div ref={elementoDiv}>
-      {isNearScreen && <SearchTrending />}
-    </div>
-  );
-};
-
-export default SearchTrendingLazy;
+export default SearchTrending;

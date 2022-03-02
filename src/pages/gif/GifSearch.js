@@ -6,7 +6,11 @@ import { useGifs } from '../../hooks/useGifs';
 
 const GifSearch = (props) => {
   const { keyword } = props.params;
-  const { loading, gifs } = useGifs(keyword);
+  const { loading, gifs, setPage, loadingPage } = useGifs(keyword);
+
+  const handleNextPage = () => {
+    setPage(p => p + 1);
+  };
 
   if (loading) {
     return <Spinner />
@@ -15,6 +19,9 @@ const GifSearch = (props) => {
   return (
     <>
       <GifList gifs={gifs} />
+      {loadingPage && <Spinner />}
+      <br />
+      <button onClick={handleNextPage}>Next Page</button>
     </>
   );
 };
