@@ -1,15 +1,26 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useLocation } from 'wouter';
 import { useGifs } from '../../hooks/useGifs';
 import { gifSearchBR } from '../../constants/appRouterConstants';
-import Spinner from '../../components/spinner/Spinner';
-import GifList from '../../components/gif/GifList';
-import SearchTrending from '../../components/trending/SearchTrending';
+import Spinner from 'components/spinner/Spinner';
+import GifList from 'components/gif/GifList';
+import SearchTrending from 'components/trending/SearchTrending';
+import { getTrendingGif } from 'services/gifService';
 
 const Home = () => {
   const [keyword, setKeyword] = useState('');
+  const [trends, setTrends] = useState([]);
   const { loading, gifs } = useGifs();
   const pushLocation = useLocation()[1];
+
+  const _getTrendingGif = async () => {
+    const response = await getTrendingGif();
+    setTrends(response);
+  };
+
+  useEffect(() => {
+    _getTrendingGif();
+  }, []);
 
   const handleSubmit = evt => {
     evt.preventDefault();
@@ -39,7 +50,7 @@ const Home = () => {
 
       <h3>úlitmos Gifs</h3>
       <GifList gifs={gifs} />
-      <SearchTrending />
+      <SearchTrending trends={trends} />
     </>
   );
 };
