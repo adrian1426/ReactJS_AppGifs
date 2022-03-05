@@ -16,7 +16,13 @@ export const useGifs = (keyword) => {
     const newKeyword = keyword || localStorage.getItem('lastKey') || 'random';
 
     const gifs = await getGifs(newKeyword, page);
-    setGifs(gifsPrev => gifsPrev.concat(gifs));
+    setGifs(gifsPrev => {
+      if (page > INITIAL_PAGE) {
+        return gifsPrev.concat(gifs)
+      }
+
+      return gifs;
+    });
 
     if (keyword) {
       localStorage.setItem('lastKey', keyword);
