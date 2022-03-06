@@ -5,7 +5,7 @@ import { useNearScreen } from '../../hooks/useNearScreen';
 const SearchTrending = lazy(() => import('./SearchTrending'));
 
 const SearchTrendingLazy = () => {
-  const [isNearScreen, elementoDiv] = useNearScreen('115px');
+  const [isNearScreen, elementoDiv] = useNearScreen({ distance: '115px' });
 
   return (
     <div ref={elementoDiv}>

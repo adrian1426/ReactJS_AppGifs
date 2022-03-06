@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 
-export const useNearScreen = (distance = '100px') => {
+export const useNearScreen = ({ distance = '100px', externalRef, once = true }) => {
   const [show, setShow] = useState(false);
   const elementoDiv = useRef();
+  const elemento = externalRef || elementoDiv;
 
   useEffect(() => {
     const onLoadObserver = (entries, observ) => {
@@ -10,7 +11,9 @@ export const useNearScreen = (distance = '100px') => {
 
       if (element.isIntersecting) {
         setShow(true);
-        observ.disconnect();
+        once && observ.disconnect();
+      } else {
+        setShow(false);
       }
     };
 
@@ -18,10 +21,10 @@ export const useNearScreen = (distance = '100px') => {
       rootMargin: distance
     });
 
-    observer.observe(elementoDiv.current);
+    elemento.current && observer.observe(elemento.current);
 
     return () => observer.disconnect();
   });
 
-  return [show, elementoDiv];
+  return [show, elemento];
 };
