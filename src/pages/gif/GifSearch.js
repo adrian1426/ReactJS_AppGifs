@@ -32,6 +32,8 @@ const GifSearch = (props) => {
 
   return (
     <>
+      <label htmlFor="">{keyword}</label>
+      <br />
       <GifList gifs={gifs} />
       <div id='visor' ref={externalRef}></div>
       {loadingPage && <Spinner />}
