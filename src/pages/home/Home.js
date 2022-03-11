@@ -1,23 +1,17 @@
-import { useState } from 'react';
 import { useLocation } from 'wouter';
 import { useGifs } from '../../hooks/useGifs';
 import { gifSearchBR } from '../../constants/appRouterConstants';
 import Spinner from 'components/spinner/Spinner';
 import GifList from 'components/gif/GifList';
 import SearchTrendingLazy from 'components/trending/SearchTrendingLazy';
+import SearchForm from 'components/searchForm/SearchForm';
 
 const Home = () => {
-  const [keyword, setKeyword] = useState('');
   const { loading, gifs } = useGifs();
   const pushLocation = useLocation()[1];
 
-  const handleSubmit = evt => {
-    evt.preventDefault();
+  const handleSubmit = (keyword) => {
     pushLocation(`${gifSearchBR}/${keyword}`);
-  };
-
-  const handleChange = evt => {
-    setKeyword(evt.target.value);
   };
 
   if (loading) {
@@ -28,14 +22,7 @@ const Home = () => {
     <>
       <h3 className='App-title'>Los gifs más populares</h3>
 
-      <form onSubmit={handleSubmit}>
-        <input
-          placeholder='buscar gif aquí'
-          type="text"
-          onChange={handleChange}
-          value={keyword}
-        />
-      </form>
+      <SearchForm handleSubmit={handleSubmit} />
 
       <h3>úlitmos Gifs</h3>
       <GifList gifs={gifs} />
