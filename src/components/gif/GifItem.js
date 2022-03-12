@@ -1,3 +1,4 @@
+import React from 'react';
 import { Link } from 'wouter';
 import { gifDetailBR } from '../../constants/appRouterConstants';
 import './GifItem.css';
@@ -22,4 +23,4 @@ const GifItem = (props) => {
   );
 };
 
-export default GifItem;
+export default React.memo(GifItem);
