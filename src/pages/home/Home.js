@@ -23,6 +23,7 @@ const Home = () => {
     <>
       <Helmet>
         <title>Giffy | Home</title>
+        <link rel='canonical' href='https://gifs-lovat.vercel.app/' />
       </Helmet>
       <h3 className='App-title'>Los gifs más populares</h3>
 
