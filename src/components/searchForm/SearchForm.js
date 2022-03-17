@@ -10,13 +10,9 @@ const SearchForm = () => {
     setKeyword(evt.target.value);
   };
 
-  const _handleSubmit = (keyword) => {
-    pushLocation(`${gifSearchBR}/${keyword}`);
-  };
-
   const handleSubmit = evt => {
     evt.preventDefault();
-    _handleSubmit(keyword);
+    pushLocation(`${gifSearchBR}/${keyword}`);
   };
 
   return (
