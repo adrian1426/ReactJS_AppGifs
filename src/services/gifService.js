@@ -40,3 +40,26 @@ export const getTrendingGif = async () => {
     return [];
   }
 };
+
+
+export const getDetailGif = async (id) => {
+  const urlGifs = `${apiBase}/gifs/${id}?api_key=${apiKey}`;
+
+  try {
+    const response = await fetch(urlGifs);
+    const dataResponse = await response.json();
+
+    const { data } = dataResponse;
+    const { images, title, id } = data;
+    const { url } = images.downsized_medium;
+
+    return {
+      id,
+      title,
+      url
+    };
+
+  } catch (error) {
+    return {};
+  }
+};

@@ -4,7 +4,7 @@ import { Route, Link } from 'wouter';
 // import Home from './pages/home/Home';
 import GifSearch from './pages/gif/GifSearch';
 import GifDetail from './pages/gif/GifDetail';
-import { gifDetailR, gifSearchR, homeR } from './constants/appRouterConstants';
+import { error, gifDetailR, gifSearchR, homeR } from './constants/appRouterConstants';
 import Contexto from './context/StaticContext';
 import { ContextProviderGif } from './context/GifContext';
 import './App.css';
@@ -32,6 +32,10 @@ function App() {
               <Route
                 path={gifDetailR}
                 component={GifDetail}
+              />
+              <Route
+                path={error}
+                component={() => <h1>Error 404 :(</h1>}
               />
             </Suspense>
           </ContextProviderGif>
