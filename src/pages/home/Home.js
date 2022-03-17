@@ -5,6 +5,7 @@ import Spinner from 'components/spinner/Spinner';
 import GifList from 'components/gif/GifList';
 import SearchTrendingLazy from 'components/trending/SearchTrendingLazy';
 import SearchForm from 'components/searchForm/SearchForm';
+import { Helmet } from 'react-helmet';
 
 const Home = () => {
   const { loading, gifs } = useGifs();
@@ -20,6 +21,9 @@ const Home = () => {
 
   return (
     <>
+      <Helmet>
+        <title>Giffy | Home</title>
+      </Helmet>
       <h3 className='App-title'>Los gifs más populares</h3>
 
       <SearchForm handleSubmit={handleSubmit} />

@@ -4,7 +4,7 @@ import GifList from '../../components/gif/GifList';
 import Spinner from '../../components/spinner/Spinner';
 import { useGifs } from '../../hooks/useGifs';
 import debounce from 'just-debounce-it';
-import { useSEO } from 'hooks/useSEO';
+import { Helmet } from 'react-helmet';
 
 const GifSearch = (props) => {
   const { keyword } = props.params;
@@ -13,7 +13,6 @@ const GifSearch = (props) => {
   const [isNearScreen] = useNearScreen({ externalRef, once: false });
 
   const title = gifs ? `${gifs.length} resultados de ${keyword}` : '';
-  useSEO({ title });
 
   const handleNextPage = () => {
     setPage(p => p + 1);
@@ -36,6 +35,11 @@ const GifSearch = (props) => {
 
   return (
     <>
+      <Helmet>
+        <title>{title}</title>
+        <meta name="description" content={title} />
+      </Helmet>
+
       <label htmlFor="">{keyword}</label>
       <br />
       <GifList gifs={gifs} />
