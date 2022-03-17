@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 
-export const useSEO = (title) => {
+export const useSEO = ({ title }) => {
 
   const prevTitle = useRef(document.title);
 

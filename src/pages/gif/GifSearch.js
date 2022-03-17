@@ -13,7 +13,7 @@ const GifSearch = (props) => {
   const [isNearScreen] = useNearScreen({ externalRef, once: false });
 
   const title = gifs ? `${gifs.length} resultados de ${keyword}` : '';
-  useSEO(title);
+  useSEO({ title });
 
   const handleNextPage = () => {
     setPage(p => p + 1);

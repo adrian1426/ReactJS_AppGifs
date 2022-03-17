@@ -9,7 +9,7 @@ const GifDetail = (props) => {
   const { gif, loading, isError } = useGifDetail(params.id);
 
   const title = gif ? gif.title : '';
-  useSEO(title);
+  useSEO({ title });
 
   if (loading) {
     return <Spinner />;
