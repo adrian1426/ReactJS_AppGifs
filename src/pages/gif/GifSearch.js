@@ -5,6 +5,7 @@ import Spinner from '../../components/spinner/Spinner';
 import { useGifs } from '../../hooks/useGifs';
 import debounce from 'just-debounce-it';
 import { Helmet } from 'react-helmet';
+import SearchForm from 'components/searchForm/SearchForm';
 
 const GifSearch = (props) => {
   const { keyword } = props.params;
@@ -39,6 +40,8 @@ const GifSearch = (props) => {
         <title>{title}</title>
         <meta name="description" content={title} />
       </Helmet>
+
+      <SearchForm />
 
       <label htmlFor="">{keyword}</label>
       <br />
