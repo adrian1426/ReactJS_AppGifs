@@ -1,11 +1,11 @@
-import { buscarGyfType, agregarRating } from './gyfTypes';
+import { BUSCAR_GIF_TYPE, AGREGAR_RATING_TYPE } from './gyfTypes';
 
 export const buscarGyfAction = payload => ({
-  type: buscarGyfType,
+  type: BUSCAR_GIF_TYPE,
   payload
 });
 
 export const agregarRatingAction = payload => ({
-  type: agregarRating,
+  type: AGREGAR_RATING_TYPE,
   payload
 });

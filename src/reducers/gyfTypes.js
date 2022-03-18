@@ -1,2 +1,2 @@
-export const buscarGyfType = 'GYF/BUSCAR';
-export const agregarRating = 'GYF/AGREGAR_RATING';
+export const BUSCAR_GIF_TYPE = 'GYF/BUSCAR';
+export const AGREGAR_RATING_TYPE = 'GYF/AGREGAR_RATING';
