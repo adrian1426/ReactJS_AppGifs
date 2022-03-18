@@ -1,19 +1,22 @@
+import { useReducer } from 'react';
 import { gifSearchBR } from 'constants/appRouterConstants';
-import { useState } from 'react';
 import { useLocation } from 'wouter';
+import { gyfReducer } from '../../reducers/gyfReducer';
+import { buscarGyfAction, agregarRatingAction } from '../../reducers/gyfActions';
 
 const RATINGS = ['g', 'pg', 'pg-13', 'r'];
 
 const SearchForm = ({ initialKeyword, initialRating }) => {
   const valueKeyword = initialKeyword ? decodeURI(initialKeyword) : '';
   const valueRating = initialRating ? initialRating : RATINGS[0];
-
-  const [keyword, setKeyword] = useState(valueKeyword);
-  const [rating, setRating] = useState(valueRating);
+  const initialState = { keyword: valueKeyword, times: 0, rating: valueRating };
   const pushLocation = useLocation()[1];
 
+  const [state, dispatch] = useReducer(gyfReducer, initialState);
+  const { keyword, times, rating } = state;
+
   const handleChange = evt => {
-    setKeyword(evt.target.value);
+    dispatch(buscarGyfAction(evt.target.value));
   };
 
   const handleSubmit = evt => {
@@ -22,7 +25,7 @@ const SearchForm = ({ initialKeyword, initialRating }) => {
   };
 
   const handleChangeRating = (evt) => {
-    setRating(evt.target.value);
+    dispatch(agregarRatingAction(evt.target.value))
     if (keyword) {
       pushLocation(`${gifSearchBR}/${keyword}/${evt.target.value}`);
     }
@@ -49,6 +52,8 @@ const SearchForm = ({ initialKeyword, initialRating }) => {
           ))
         }
       </select>
+
+      <label>{times}</label>
     </form>
   );
 };
