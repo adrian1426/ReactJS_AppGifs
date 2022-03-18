@@ -8,8 +8,8 @@ import { Helmet } from 'react-helmet';
 import SearchForm from 'components/searchForm/SearchForm';
 
 const GifSearch = (props) => {
-  const { keyword } = props.params;
-  const { loading, gifs, setPage, loadingPage } = useGifs(keyword);
+  const { keyword, rating } = props.params;
+  const { loading, gifs, setPage, loadingPage } = useGifs({ keyword, rating });
   const externalRef = useRef();
   const [isNearScreen] = useNearScreen({ externalRef, once: false });
 
@@ -41,9 +41,12 @@ const GifSearch = (props) => {
         <meta name="description" content={title} />
       </Helmet>
 
-      <SearchForm />
+      <SearchForm
+        initialKeyword={keyword}
+        initialRating={rating}
+      />
 
-      <label htmlFor="">{keyword}</label>
+      <label htmlFor="">{decodeURI(keyword)}</label>
       <br />
       <GifList gifs={gifs} />
       <div id='visor' ref={externalRef}></div>

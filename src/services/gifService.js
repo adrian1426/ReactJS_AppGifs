@@ -1,9 +1,9 @@
 const apiBase = process.env.REACT_APP_API_GIFS;
 const apiKey = process.env.REACT_APP_API_KEY;
 
-export const getGifs = async (keyWord = 'panda', page = 0, limit = 25) => {
+export const getGifs = async ({ keyword = 'panda', page = 0, limit = 25, rating = 'g' }) => {
   const offset = limit * page;
-  const urlGifs = `${apiBase}/gifs/search?api_key=${apiKey}&q=${keyWord}&limit=${limit}&offset=${offset}&rating=G&lang=en`;
+  const urlGifs = `${apiBase}/gifs/search?api_key=${apiKey}&q=${keyword}&limit=${limit}&offset=${offset}&rating=${rating}&lang=en`;
 
   try {
     const response = await fetch(urlGifs);

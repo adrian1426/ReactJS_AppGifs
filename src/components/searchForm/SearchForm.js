@@ -2,8 +2,14 @@ import { gifSearchBR } from 'constants/appRouterConstants';
 import { useState } from 'react';
 import { useLocation } from 'wouter';
 
-const SearchForm = () => {
-  const [keyword, setKeyword] = useState('');
+const RATINGS = ['g', 'pg', 'pg-13', 'r'];
+
+const SearchForm = ({ initialKeyword, initialRating }) => {
+  const valueKeyword = initialKeyword ? decodeURI(initialKeyword) : '';
+  const valueRating = initialRating ? initialRating : RATINGS[0];
+
+  const [keyword, setKeyword] = useState(valueKeyword);
+  const [rating, setRating] = useState(valueRating);
   const pushLocation = useLocation()[1];
 
   const handleChange = evt => {
@@ -12,7 +18,14 @@ const SearchForm = () => {
 
   const handleSubmit = evt => {
     evt.preventDefault();
-    pushLocation(`${gifSearchBR}/${keyword}`);
+    pushLocation(`${gifSearchBR}/${keyword}/${rating}`);
+  };
+
+  const handleChangeRating = (evt) => {
+    setRating(evt.target.value);
+    if (keyword) {
+      pushLocation(`${gifSearchBR}/${keyword}/${evt.target.value}`);
+    }
   };
 
   return (
@@ -23,6 +36,19 @@ const SearchForm = () => {
         onChange={handleChange}
         value={keyword}
       />
+
+      <select value={rating} onChange={handleChangeRating}>
+        <option disabled>Rating type</option>
+        {
+          RATINGS.map(rat => (
+            <option
+              key={rat}
+            >
+              {rat}
+            </option>
+          ))
+        }
+      </select>
     </form>
   );
 };

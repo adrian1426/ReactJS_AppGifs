@@ -4,7 +4,7 @@ import { getGifs } from '../services/gifService';
 
 const INITIAL_PAGE = 0;
 
-export const useGifs = (keyword) => {
+export const useGifs = ({ keyword, rating } = {}) => {
   const { gifs, setGifs } = useContext(GifContext);
   const [loading, setLoading] = useState(false);
   const [loadingPage, setLoadingPage] = useState(false);
@@ -15,7 +15,7 @@ export const useGifs = (keyword) => {
 
     const newKeyword = keyword || localStorage.getItem('lastKey') || 'random';
 
-    const gifs = await getGifs(newKeyword, page);
+    const gifs = await getGifs({ keyword: newKeyword, page, rating });
     setGifs(gifsPrev => {
       if (page > INITIAL_PAGE) {
         return gifsPrev.concat(gifs)
@@ -29,7 +29,7 @@ export const useGifs = (keyword) => {
     }
 
     page === INITIAL_PAGE ? setLoading(false) : setLoadingPage(false);
-  }, [keyword, setGifs, page]);
+  }, [keyword, setGifs, page, rating]);
 
   useEffect(() => {
     _getGifs();
