@@ -2,7 +2,7 @@ import { useReducer } from 'react';
 import { agregarRatingAction, buscarGyfAction } from 'reducers/gyfActions';
 import { gyfReducer } from '../reducers/gyfReducer';
 
-export const useSearchForm = ({ valueKeyword, valueRating }) => {
+export const useSearchForm = ({ valueKeyword, valueRating } = {}) => {
   const initialState = { keyword: valueKeyword, times: 0, rating: valueRating };
   const [state, dispatch] = useReducer(gyfReducer, initialState);
   const { keyword, times, rating } = state;
