@@ -4,6 +4,7 @@ import { Route, Link } from 'wouter';
 import GifSearch from './pages/gif/GifSearch';
 import GifDetail from './pages/gif/GifDetail';
 import Error from 'pages/error/Error';
+import Header from 'components/header/Header';
 import { error, gifDetailR, gifSearchR, homeR } from './constants/appRouterConstants';
 import Contexto from './context/StaticContext';
 import { ContextProviderGif } from './context/GifContext';
@@ -17,6 +18,7 @@ function App() {
     <Contexto.Provider value={{ name: 'Adrian' }}>
       <div className="App">
         <section className='App-content'>
+          <Header />
           <Link to={homeR}>Logo home</Link>
 
           <ContextProviderGif>
