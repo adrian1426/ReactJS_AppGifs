@@ -5,18 +5,18 @@ import GifSearch from './pages/gif/GifSearch';
 import GifDetail from './pages/gif/GifDetail';
 import Error from 'pages/error/Error';
 import Header from 'components/header/Header';
-import { error, gifDetailR, gifSearchR, homeR, login } from './constants/appRouterConstants';
-import Contexto from './context/StaticContext';
-import { ContextProviderGif } from './context/GifContext';
-import './App.css';
 import Login from 'pages/login/Login';
+import { gifDetailR, gifSearchR, homeR, login } from './constants/appRouterConstants';
+import { ContextProviderGif } from './context/GifContext';
+import { ContextProviderUser } from './context/UserContext';
+import './App.css';
 
 const Home = lazy(() => import('./pages/home/Home'));
 
 function App() {
 
   return (
-    <Contexto.Provider value={{ name: 'Adrian' }}>
+    <ContextProviderUser>
       <div className="App">
         <section className='App-content'>
           <Header />
@@ -48,7 +48,7 @@ function App() {
           </ContextProviderGif>
         </section>
       </div>
-    </Contexto.Provider>
+    </ContextProviderUser>
   );
 }
 
