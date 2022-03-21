@@ -5,10 +5,11 @@ import GifSearch from './pages/gif/GifSearch';
 import GifDetail from './pages/gif/GifDetail';
 import Error from 'pages/error/Error';
 import Header from 'components/header/Header';
-import { error, gifDetailR, gifSearchR, homeR } from './constants/appRouterConstants';
+import { error, gifDetailR, gifSearchR, homeR, login } from './constants/appRouterConstants';
 import Contexto from './context/StaticContext';
 import { ContextProviderGif } from './context/GifContext';
 import './App.css';
+import Login from 'pages/login/Login';
 
 const Home = lazy(() => import('./pages/home/Home'));
 
@@ -36,7 +37,11 @@ function App() {
                 component={GifDetail}
               />
               <Route
-                path={error}
+                path={login}
+                component={Login}
+              />
+              <Route
+                path={'/404'}
                 component={Error}
               />
             </Suspense>
