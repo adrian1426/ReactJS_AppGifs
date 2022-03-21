@@ -1,9 +1,9 @@
 
 import { lazy, Suspense } from 'react';
 import { Route, Link } from 'wouter';
-// import Home from './pages/home/Home';
 import GifSearch from './pages/gif/GifSearch';
 import GifDetail from './pages/gif/GifDetail';
+import Error from 'pages/error/Error';
 import { error, gifDetailR, gifSearchR, homeR } from './constants/appRouterConstants';
 import Contexto from './context/StaticContext';
 import { ContextProviderGif } from './context/GifContext';
@@ -35,7 +35,7 @@ function App() {
               />
               <Route
                 path={error}
-                component={() => <h1>Error 404 :(</h1>}
+                component={Error}
               />
             </Suspense>
           </ContextProviderGif>
