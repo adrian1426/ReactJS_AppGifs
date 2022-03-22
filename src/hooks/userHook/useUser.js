@@ -8,8 +8,13 @@ export const useUser = () => {
     setJwt('motoken');
   }, [setJwt]);
 
+  const logout = useCallback(() => {
+    setJwt(null);
+  }, [setJwt]);
+
   return {
     isLogged: Boolean(jwt),
-    login
+    login,
+    logout
   }
 };

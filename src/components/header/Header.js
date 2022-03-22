@@ -4,13 +4,13 @@ import { useUser } from '../../hooks/userHook/useUser';
 import './Login.css';
 
 const Header = () => {
-  const { isLogged } = useUser();
+  const { isLogged, logout } = useUser();
 
   return (
     <header className='gf-header'>
       {
         isLogged ?
-          <Link to='/logout'>Logout</Link> :
+          <a href='#!' onClick={logout}>Logout</a> :
           <Link to='/login'>Login</Link>
       }
     </header>
