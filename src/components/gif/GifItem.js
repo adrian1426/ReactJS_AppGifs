@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'wouter';
 import { gifDetailBR } from '../../constants/appRouterConstants';
+import Favorito from '../favoritos/Favorito';
 import './GifItem.css';
 
 const GifItem = (props) => {
@@ -8,6 +9,11 @@ const GifItem = (props) => {
 
   return (
     <div className='Gif'>
+
+      <div className='Gif-buttons'>
+        <Favorito id={gif.id} />
+      </div>
+
       <Link
         to={`${gifDetailBR}/${gif.id}`}
         className="Gif-link"
