@@ -6,11 +6,11 @@ const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useLocation()[1];
-  const { login, isLogged } = useUser();
+  const { login, isLogged, loading, error } = useUser();
 
   const handleSubmit = e => {
     e.preventDefault();
-    login();
+    login({ username, password });
   };
 
   useEffect(() => {
@@ -18,6 +18,14 @@ const Login = () => {
       navigate('/');
     }
   }, [isLogged, navigate]);
+
+  if (loading) {
+    return <h1>Cargando...</h1>;
+  }
+
+  if (error) {
+    return <h1>Error login...</h1>;
+  }
 
   return (
     <form onSubmit={handleSubmit}>
