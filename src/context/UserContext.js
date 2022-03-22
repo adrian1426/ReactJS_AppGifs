@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 const Context = React.createContext({});
 
 export const ContextProviderUser = ({ children }) => {
-  const [jwt, setJwt] = useState([]);
+  const [jwt, setJwt] = useState(null);
 
   return (
     <Context.Provider value={{ jwt, setJwt }}>

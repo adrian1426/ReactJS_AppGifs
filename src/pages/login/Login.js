@@ -1,15 +1,23 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useLocation } from 'wouter';
+import { useUser } from '../../hooks/userHook/useUser';
 
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useLocation()[1];
+  const { login, isLogged } = useUser();
 
   const handleSubmit = e => {
     e.preventDefault();
-    navigate('/');
+    login();
   };
+
+  useEffect(() => {
+    if (isLogged) {
+      navigate('/');
+    }
+  }, [isLogged, navigate]);
 
   return (
     <form onSubmit={handleSubmit}>
