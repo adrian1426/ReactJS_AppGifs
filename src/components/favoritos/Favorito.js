@@ -2,6 +2,7 @@ import React from 'react';
 import { useLocation } from 'wouter';
 import { login } from 'constants/appRouterConstants';
 import { useUser } from '../../hooks/userHook/useUser';
+import './Favorito.css';
 
 const Favorito = (props) => {
   const { id } = props;
@@ -17,7 +18,10 @@ const Favorito = (props) => {
   };
 
   return (
-    <button onClick={handleClick}>
+    <button
+      className='gf-fav'
+      onClick={handleClick}
+    >
       <span
         role='img'
         aria-label='Favoritos Gif'
