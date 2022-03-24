@@ -6,13 +6,17 @@ export const useUser = () => {
   const { jwt, setJwt } = useContext(UserContext);
 
   const login = useCallback(({ username, password }) => {
+    const token = `mitoken:${username}-${password}`;
+
     setState(st => ({ ...st, loading: true }));
-    setJwt(`mitoken:${username}-${password}`);
+    setJwt(token);
+    window.sessionStorage.setItem('jwt', token);
     setState(st => ({ ...st, loading: false }));
   }, [setJwt]);
 
   const logout = useCallback(() => {
     setJwt(null);
+    window.sessionStorage.removeItem('jwt');
   }, [setJwt]);
 
   return {
