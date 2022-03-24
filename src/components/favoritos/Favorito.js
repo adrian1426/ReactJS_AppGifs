@@ -6,15 +6,18 @@ import './Favorito.css';
 
 const Favorito = (props) => {
   const { id } = props;
-  const { isLogged, addFavorito, favs } = useUser();
+  const { isLogged, addFavorito, favs, delFavorito } = useUser();
   const navigate = useLocation()[1];
+
+  const isFavorito = favs.some(f => f === id);
+  const [texto, emoji] = isFavorito ? ['Quitar de favoritos', '❌'] : ['Agregar a favorito', '💖'];
 
   const handleClick = () => {
     if (!isLogged) {
       return navigate(login);
     }
 
-    addFavorito({ id });
+    isFavorito ? delFavorito({ id }) : addFavorito({ id });
   };
 
   return (
@@ -24,9 +27,9 @@ const Favorito = (props) => {
     >
       <span
         role='img'
-        aria-label='Favoritos Gif'
+        aria-label={texto}
       >
-        💖
+        {emoji}
       </span>
     </button>
   );

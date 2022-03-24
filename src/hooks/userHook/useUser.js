@@ -23,6 +23,11 @@ export const useUser = () => {
     setFavs(f => [...f, id]);
   }, [setFavs]);
 
+  const delFavorito = useCallback(({ id }) => {
+    const filter = favs.filter(f => f !== id);
+    setFavs(filter)
+  }, [favs, setFavs]);
+
   return {
     isLogged: Boolean(jwt),
     login,
@@ -30,6 +35,7 @@ export const useUser = () => {
     loading: state.loading,
     error: state.error,
     addFavorito,
+    delFavorito,
     favs
   }
 };
