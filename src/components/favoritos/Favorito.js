@@ -6,7 +6,7 @@ import './Favorito.css';
 
 const Favorito = (props) => {
   const { id } = props;
-  const { isLogged } = useUser();
+  const { isLogged, addFavorito, favs } = useUser();
   const navigate = useLocation()[1];
 
   const handleClick = () => {
@@ -14,7 +14,7 @@ const Favorito = (props) => {
       return navigate(login);
     }
 
-    alert(id)
+    addFavorito({ id });
   };
 
   return (

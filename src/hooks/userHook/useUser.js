@@ -3,7 +3,7 @@ import UserContext from '../../context/UserContext';
 
 export const useUser = () => {
   const [state, setState] = useState({ loading: false, error: false });
-  const { jwt, setJwt } = useContext(UserContext);
+  const { jwt, setJwt, setFavs, favs } = useContext(UserContext);
 
   const login = useCallback(({ username, password }) => {
     const token = `mitoken:${username}-${password}`;
@@ -19,11 +19,17 @@ export const useUser = () => {
     window.sessionStorage.removeItem('jwt');
   }, [setJwt]);
 
+  const addFavorito = useCallback(({ id }) => {
+    setFavs(f => [...f, id]);
+  }, [setFavs]);
+
   return {
     isLogged: Boolean(jwt),
     login,
     logout,
     loading: state.loading,
-    error: state.error
+    error: state.error,
+    addFavorito,
+    favs
   }
 };
