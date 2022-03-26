@@ -8,29 +8,44 @@ const initialValues = {
 const RegisterForm = () => {
   return (
     <>
-      <h2>registro de usuarios</h2>
       <Formik
         initialValues={initialValues}
-        onSubmit={(values) => {
-          console.log(values)
+        onSubmit={(values, { setFieldError }) => {
+          console.log(values);
+          if (values.password === '123') {
+            setFieldError('password', 'El password debe ser diferente a 123');
+          }
         }}
       >
         {
           ({
             handleSubmit,
             handleChange,
-            isSubmitting
+            isSubmitting,
+            errors
           }) =>
           (
-            <form onSubmit={handleSubmit}>
+            <form
+              className='form'
+              onSubmit={handleSubmit}
+            >
               <input
                 name='username'
+                placeholder='usuario'
                 onChange={handleChange}
               />
+
               <input
                 name='password'
+                placeholder='password'
                 onChange={handleChange}
               />
+              <span
+                style={{ color: 'red', fontSize: '10px' }}
+              >
+                {errors.password}
+              </span>
+
               <button
                 type='submit'
                 className='btn'
