@@ -18,7 +18,7 @@ const Login = (props) => {
   useEffect(() => {
     if (isLogged) {
       navigate('/');
-      onLogged();
+      onLogged && onLogged();
     }
   }, [isLogged, navigate, onLogged]);
 
