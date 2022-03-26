@@ -1,7 +1,8 @@
+import { registerBR } from 'constants/appRouterConstants';
 import React from 'react';
 import { Link } from 'wouter';
 import { useUser } from '../../hooks/userHook/useUser';
-import './Login.css';
+import './Header.css';
 
 const Header = () => {
   const { isLogged, logout } = useUser();
@@ -11,7 +12,10 @@ const Header = () => {
       {
         isLogged ?
           <a href='#!' onClick={logout}>Logout</a> :
-          <Link to='/login'>Login</Link>
+          <>
+            <Link to='/login'>Login</Link>
+            <Link to={registerBR}>Registro</Link>
+          </>
       }
     </header>
   );

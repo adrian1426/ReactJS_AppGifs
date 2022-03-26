@@ -6,10 +6,11 @@ import GifDetail from './pages/gif/GifDetail';
 import Error from 'pages/error/Error';
 import Header from 'components/header/Header';
 import Login from 'pages/login/Login';
-import { gifDetailR, gifSearchR, homeR, login } from './constants/appRouterConstants';
+import { gifDetailR, gifSearchR, homeR, login, registerBR } from './constants/appRouterConstants';
 import { ContextProviderGif } from './context/GifContext';
 import { ContextProviderUser } from './context/UserContext';
 import './App.css';
+import Register from 'pages/register/Register';
 
 const Home = lazy(() => import('./pages/home/Home'));
 
@@ -39,6 +40,10 @@ function App() {
               <Route
                 path={login}
                 component={Login}
+              />
+              <Route
+                path={registerBR}
+                component={Register}
               />
               <Route
                 path={'/404'}
