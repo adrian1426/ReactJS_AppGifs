@@ -1,37 +1,49 @@
-import React from 'react';
-import { useLocation } from 'wouter';
-import { login } from 'constants/appRouterConstants';
+import React, { useState } from 'react';
 import { useUser } from '../../hooks/userHook/useUser';
+import Modal from 'components/common/modal/Modal';
 import './Favorito.css';
+import Login from 'components/login/Login';
 
 const Favorito = (props) => {
   const { id } = props;
+  const [showModal, setShowModal] = useState(false);
   const { isLogged, addFavorito, favs, delFavorito } = useUser();
-  const navigate = useLocation()[1];
 
   const isFavorito = favs.some(f => f === id);
   const [texto, emoji] = isFavorito ? ['Quitar de favoritos', '❌'] : ['Agregar a favorito', '💖'];
 
   const handleClick = () => {
     if (!isLogged) {
-      return navigate(login);
+      return setShowModal(true);
     }
 
     isFavorito ? delFavorito({ id }) : addFavorito({ id });
   };
 
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
+
   return (
-    <button
-      className='gf-fav'
-      onClick={handleClick}
-    >
-      <span
-        role='img'
-        aria-label={texto}
+    <>
+      <button
+        className='gf-fav'
+        onClick={handleClick}
       >
-        {emoji}
-      </span>
-    </button>
+        <span
+          role='img'
+          aria-label={texto}
+        >
+          {emoji}
+        </span>
+      </button>
+
+      {showModal && (
+        <Modal onClose={handleCloseModal} >
+          <Login />
+        </Modal>
+      )}
+    </>
   );
 };
 
