@@ -3,11 +3,12 @@ import { useLocation } from 'wouter';
 import { useUser } from '../../hooks/userHook/useUser';
 import './Login.css';
 
-const Login = () => {
+const Login = (props) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useLocation()[1];
   const { login, isLogged, loading, error } = useUser();
+  const { onLogged } = props;
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -17,8 +18,9 @@ const Login = () => {
   useEffect(() => {
     if (isLogged) {
       navigate('/');
+      onLogged();
     }
-  }, [isLogged, navigate]);
+  }, [isLogged, navigate, onLogged]);
 
   if (loading) {
     return <h1>Cargando...</h1>;

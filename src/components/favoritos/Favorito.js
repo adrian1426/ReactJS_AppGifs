@@ -40,7 +40,7 @@ const Favorito = (props) => {
 
       {showModal && (
         <Modal onClose={handleCloseModal} >
-          <Login />
+          <Login onLogged={handleCloseModal} />
         </Modal>
       )}
     </>
