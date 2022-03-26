@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useUser } from '../../hooks/userHook/useUser';
 import Modal from 'components/common/modal/Modal';
-import './Favorito.css';
 import Login from 'components/login/Login';
+import './Favorito.css';
 
 const Favorito = (props) => {
   const { id } = props;
