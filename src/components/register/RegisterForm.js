@@ -1,4 +1,5 @@
 import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { useState } from 'react';
 
 const initialValues = {
   username: '',
@@ -22,6 +23,11 @@ const validaciones = (values) => {
 };
 
 const RegisterForm = () => {
+  const [registered, setRegirested] = useState(false);
+
+  if (registered) {
+    return <h2>Felicidades ha sido registrado en el sistema</h2>;
+  }
 
   return (
     <>
@@ -33,12 +39,12 @@ const RegisterForm = () => {
           if (values.password === '123') {
             setFieldError('password', 'El password debe ser diferente a 123');
           }
+
+          setRegirested(true);
         }}
       >
         {
-          ({
-            errors
-          }) =>
+          () =>
           (
             <Form
               className='form'
