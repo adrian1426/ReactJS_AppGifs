@@ -1,29 +1,14 @@
-import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { useState } from 'react';
-
-const initialValues = {
-  username: '',
-  password: ''
-};
-
-const validaciones = (values) => {
-  const errors = {};
-
-  if (!values.username) {
-    errors.username = 'usario requerido';
-  }
-
-  if (!values.password) {
-    errors.password = 'password requerido';
-  } else if (values.password.length < 3) {
-    errors.password = 'el password debe ser mayor a 3 caracteres';
-  }
-
-  return errors;
-};
+import { useForm } from 'react-hook-form';
 
 const RegisterForm = () => {
   const [registered, setRegirested] = useState(false);
+  const { handleSubmit, register, formState: { errors } } = useForm();
+
+  const onSubmit = (values) => {
+    console.log(values);
+    setRegirested(true);
+  };
 
   if (registered) {
     return <h2>Felicidades ha sido registrado en el sistema</h2>;
@@ -31,46 +16,30 @@ const RegisterForm = () => {
 
   return (
     <>
-      <Formik
-        initialValues={initialValues}
-        validate={values => validaciones(values)}
-        onSubmit={(values, { setFieldError }) => {
-          console.log(values);
-          if (values.password === '123') {
-            setFieldError('password', 'El password debe ser diferente a 123');
-          }
-
-          setRegirested(true);
-        }}
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className='form'
       >
-        {
-          () =>
-          (
-            <Form
-              className='form'
-            >
-              <Field
-                name='username'
-                placeholder='usuario'
-              />
-              <ErrorMessage name='username' component={'small'} />
+        <input
+          placeholder='usuario'
+          {...register('username', { required: true })}
+        />
+        {errors.username && <small>Usuario requerido</small>}
 
-              <Field
-                name='password'
-                placeholder='password'
-              />
-              <ErrorMessage name='password' component={'small'} />
+        <input
+          placeholder='password'
+          {...register('password', { required: true, minLength: 3 })}
+        />
+        {errors.password?.type === 'required' && <small>password requerido</small>}
+        {errors.password?.type === 'minLength' && <small>el password debe ser mayor a 3 caracteres</small>}
 
-              <button
-                type='submit'
-                className='btn'
-              >
-                Registrar
-              </button>
-            </Form>
-          )
-        }
-      </Formik>
+        <button
+          type='submit'
+          className='btn'
+        >
+          Registrar
+        </button>
+      </form>
     </>
   );
 };
