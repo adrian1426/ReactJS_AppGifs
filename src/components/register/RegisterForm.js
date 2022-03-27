@@ -1,27 +1,27 @@
-import { Formik } from 'formik';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
 
 const initialValues = {
   username: '',
   password: ''
 };
 
+const validaciones = (values) => {
+  const errors = {};
+
+  if (!values.username) {
+    errors.username = 'usario requerido';
+  }
+
+  if (!values.password) {
+    errors.password = 'password requerido';
+  } else if (values.password.length < 3) {
+    errors.password = 'el password debe ser mayor a 3 caracteres';
+  }
+
+  return errors;
+};
+
 const RegisterForm = () => {
-
-  const validaciones = (values) => {
-    const errors = {};
-
-    if (!values.username) {
-      errors.username = 'usario requerido';
-    }
-
-    if (!values.password) {
-      errors.password = 'password requerido';
-    } else if (values.password.length < 3) {
-      errors.password = 'el password debe ser mayor a 3 caracteres';
-    }
-
-    return errors;
-  };
 
   return (
     <>
@@ -37,46 +37,31 @@ const RegisterForm = () => {
       >
         {
           ({
-            handleSubmit,
-            handleChange,
-            isSubmitting,
             errors
           }) =>
           (
-            <form
+            <Form
               className='form'
-              onSubmit={handleSubmit}
             >
-              <input
+              <Field
                 name='username'
                 placeholder='usuario'
-                onChange={handleChange}
               />
-              <span
-                style={{ color: 'red', fontSize: '10px' }}
-              >
-                {errors.username}
-              </span>
+              <ErrorMessage name='username' component={'small'} />
 
-              <input
+              <Field
                 name='password'
                 placeholder='password'
-                onChange={handleChange}
               />
-              <span
-                style={{ color: 'red', fontSize: '10px' }}
-              >
-                {errors.password}
-              </span>
+              <ErrorMessage name='password' component={'small'} />
 
               <button
                 type='submit'
                 className='btn'
-                disabled={isSubmitting}
               >
-                Registrar {isSubmitting.toString()}
+                Registrar
               </button>
-            </form>
+            </Form>
           )
         }
       </Formik>
