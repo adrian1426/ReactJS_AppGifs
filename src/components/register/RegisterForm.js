@@ -6,10 +6,28 @@ const initialValues = {
 };
 
 const RegisterForm = () => {
+
+  const validaciones = (values) => {
+    const errors = {};
+
+    if (!values.username) {
+      errors.username = 'usario requerido';
+    }
+
+    if (!values.password) {
+      errors.password = 'password requerido';
+    } else if (values.password.length < 3) {
+      errors.password = 'el password debe ser mayor a 3 caracteres';
+    }
+
+    return errors;
+  };
+
   return (
     <>
       <Formik
         initialValues={initialValues}
+        validate={values => validaciones(values)}
         onSubmit={(values, { setFieldError }) => {
           console.log(values);
           if (values.password === '123') {
@@ -34,6 +52,11 @@ const RegisterForm = () => {
                 placeholder='usuario'
                 onChange={handleChange}
               />
+              <span
+                style={{ color: 'red', fontSize: '10px' }}
+              >
+                {errors.username}
+              </span>
 
               <input
                 name='password'
