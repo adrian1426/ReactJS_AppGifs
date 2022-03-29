@@ -1,9 +1,36 @@
-import React from 'react';
+/** @jsxImportSource @emotion/react */
 import SearchForm from 'components/searchForm/SearchForm';
 import { Helmet } from 'react-helmet';
-import './Error.css';
+import { css } from '@emotion/react';
 
 const gifsErrors = ['d2jjuAZzDSVLZ5kI', 'Bp3dFfoqpCKFyXuSzP', 'hv5AEBpH3ZyNoRnABG', 'hLwSzlKN8Fi6I'];
+
+const pageErrorStyles = css`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  text-align: center;
+`;
+
+const codeErrorStyles = css`
+  font-size: 5rem;
+  font-weight: bold;
+  font-style: italic;
+`;
+
+const msgErrorStyles = css`
+  font-size: 1.5rem;
+  margin: 1rem auto;
+`;
+
+const gifErrorStyles = css`
+  margin: 1rem auto;
+  width: 350px;
+  height: 350px;
+  object-fit: cover;
+`;
 
 const Error = () => {
   const randomImage = () => {
@@ -19,10 +46,10 @@ const Error = () => {
         <SearchForm />
       </header>
       <div className="App-wrapper">
-        <div className='pageErrorStyles'>
-          <span className='codeErrorStyles'>404</span>
-          <span className='msgErrorStyles'>Sometimes gettings lost isn't that bad</span>
-          <img className='gifErrorStyles' src={randomImage()} alt="alt-page-404" />
+        <div css={pageErrorStyles}>
+          <span css={codeErrorStyles}>404</span>
+          <span css={msgErrorStyles}>Sometimes gettings lost isn't that bad</span>
+          <img css={gifErrorStyles} src={randomImage()} alt="alt-page-404" />
           <a href='/'>Go back home</a>
         </div>
       </div>
