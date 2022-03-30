@@ -20,3 +20,6 @@ font-size: 1rem;
 `;
 
 export const LinkStyled = styled(Link)(common);
+
+//se estila con el componente o etiqueta button de html y se reutiliza los estilo
+export const LinkButton = LinkStyled.withComponent('button');
