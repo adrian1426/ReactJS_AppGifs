@@ -2,7 +2,7 @@
 import SearchForm from 'components/searchForm/SearchForm';
 import { Helmet } from 'react-helmet';
 import { css } from '@emotion/react';
-import Button from 'components/common/modal/Button';
+import Button from 'components/common/button/Button';
 
 const gifsErrors = ['d2jjuAZzDSVLZ5kI', 'Bp3dFfoqpCKFyXuSzP', 'hv5AEBpH3ZyNoRnABG', 'hLwSzlKN8Fi6I'];
 
