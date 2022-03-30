@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
+import { Link } from 'wouter';
 
-const LinkStyled = styled.a`
+const LinkStyled = styled(Link)`
   border: 1px solid transparent;
   padding: .5rem 1rem;
   background-color: var(--brand-color_3);
@@ -22,7 +23,7 @@ const Button = (props) => {
   const { children, href } = props;
 
   return (
-    <LinkStyled href={href}>
+    <LinkStyled to={href}>
       {children}
     </LinkStyled>
   );
