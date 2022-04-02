@@ -16,7 +16,18 @@ export const CategoryList = styled.ul`
   margin: 0;
 `;
 
-const NEED_WHITE_COLOR = [3, 4];
+const BackgroundDinamico = props => {
+  const NEED_WHITE_COLOR = [3, 4];
+  const { index } = props;
+  const colorIndex = index % 5 + 1;
+  const needWhite = NEED_WHITE_COLOR.includes(colorIndex);
+  const colorText = needWhite ? 'white' : 'var(--theme-body-bg)';
+
+  return `
+      background-color: var(--brand-color_${colorIndex});
+      color:${colorText}
+    `;
+};
 
 export const CategoryListItem = styled.li`
   list-style: none;
@@ -24,17 +35,7 @@ export const CategoryListItem = styled.li`
   margin: 0.2rem;
   font-size: 1.2rem;
 
-  ${props => {
-    const { index } = props;
-    const colorIndex = index % 5 + 1;
-    const needWhite = NEED_WHITE_COLOR.includes(colorIndex);
-    const colorText = needWhite ? 'white' : 'var(--theme-body-bg)';
-
-    return `
-      background-color: var(--brand-color_${colorIndex});
-      color:${colorText}
-    `;
-  }}
+  ${props => BackgroundDinamico(props)}
 `;
 
 export const CategoryLink = styled(Link)`
