@@ -10,9 +10,10 @@ const GifCategory = (props) => {
       <CategoryTitle>{name}</CategoryTitle>
       <CategoryList>
         {
-          options.map(popular => (
+          options.map((popular, index) => (
             <CategoryListItem
               key={popular}
+              index={index}
             >
               <CategoryLink to={`${gifSearchBR}/${popular}`}>
                 Gifs de {popular}
