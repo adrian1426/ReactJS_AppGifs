@@ -1,11 +1,19 @@
 import styled from "@emotion/styled";
 import { Link } from 'wouter';
 
+const bps = {
+  desktop: '@media screen and (min-width: 55rem)'
+};
+
 export const CategoryTitle = styled.h3`
   color: var(--theme-body-txt);
   font-weight: bold;
   margin-bottom: 0.7rem;
   margin-top: 0.6rem;
+
+  ${bps.desktop}{
+    text-align: right;
+  }
 `;
 
 export const CategoryList = styled.ul`
@@ -14,6 +22,10 @@ export const CategoryList = styled.ul`
   flex-wrap: wrap;
   padding: 0;
   margin: 0;
+
+  ${bps.desktop}{
+    justify-content: flex-end;
+  }
 `;
 
 const BackgroundDinamico = props => {
